@@ -1,13 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
 });
 
+Route::get('car/search', [CarController::class, 'search'])->name('car.search');
+Route::resource('car', CarController::class);
 
-Route::get('/signup', [SignupController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/signup', [SignupController::class, 'index'])->name('signup');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
