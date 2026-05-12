@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Car;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -48,4 +51,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function favoriteCars(): BelongsToMany
+    {
+        return $this->belongsToMany(Car::class, 'favorite_cars');
+    }
+
+    public function cars(): HasMany
+    {
+        return $this->hasMany(Car::class);
+    }
+    
 }
